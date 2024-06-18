@@ -1,10 +1,10 @@
-package ru.alexkonst.pp312_SpringBoot.services;
+package ru.alexkonst.pp312_SpringBoot.dao;
 
 import ru.alexkonst.pp312_SpringBoot.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserDao {
 
     List<User> showAllUsers();
 
@@ -14,5 +14,5 @@ public interface UserService {
 
     void updateUser(int id, User user);
 
-    void deleteUser(int id);
+    void deleteUserById(int id);
 }

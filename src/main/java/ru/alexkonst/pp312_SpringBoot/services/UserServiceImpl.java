@@ -2,52 +2,43 @@ package ru.alexkonst.pp312_SpringBoot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import ru.alexkonst.pp312_SpringBoot.dao.UserDao;
 import ru.alexkonst.pp312_SpringBoot.model.User;
-import ru.alexkonst.pp312_SpringBoot.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private final UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<User> showAllUsers() {
+        return userDao.showAllUsers();
     }
 
     @Override
-    public User findOne(int id) {
-        Optional<User> foundUser = userRepository.findById(id);
-
-        return foundUser.orElse(null);
+    public User showUserById(int id) {
+        return userDao.showUserById(id);
     }
 
     @Override
-    @Transactional
-    public void save(User user) {
-        userRepository.save(user);
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 
     @Override
-    @Transactional
-    public void update(int id, User updatedUser) {
-        updatedUser.setId(id);
-        userRepository.save(updatedUser);
+    public void updateUser(int id, User user) {
+        userDao.updateUser(id, user);
     }
 
     @Override
-    @Transactional
-    public void delete(int id) {
-        userRepository.deleteById(id);
+    public void deleteUser(int id) {
+        userDao.deleteUserById(id);
     }
 }
